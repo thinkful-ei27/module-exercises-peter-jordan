@@ -26,6 +26,20 @@ const store = (function () {
       foundItem.checked = !foundItem.checked;
   }
 
+  const findAndUpdateName = function (id, newName) {
+      try {
+        this.validateName(newName);
+        const item = this.findById(id);
+        item.name = newName;
+      } catch (error) {
+          console.log(`Cannot update name ${error.message}`)
+      }
+  }
+
+  const findAndDelete = function (id) {
+      const index = this.items.findIndex(item => item.id === id);
+      this.items.splice(index, 1);
+  }
 
   return {
     items,
@@ -33,6 +47,8 @@ const store = (function () {
     searchTerm,
     findById,
     addItem,
-
+    findAndToggleChecked,
+    findAndUpdateName,
+    findAndDelete,
   };
 }() );
