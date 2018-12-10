@@ -10,8 +10,11 @@ const store = (function () {
   ];
   const hideCheckedItems =  false;
   const searchTerm = '';
+  
   const findById = function(id) {
-      return items.find(id => id === items.id);
+      const foundId = store.items.find(item => item.id === id);
+      console.log(foundId)
+      return foundId
   }; 
   const addItem = function(name) {
       try {
@@ -22,14 +25,15 @@ const store = (function () {
       }
   }
   const findAndToggleChecked = function(id) {
-      const foundItem =this.findById(id);
+      const foundItem = findById(id);
       foundItem.checked = !foundItem.checked;
   }
 
   const findAndUpdateName = function (id, newName) {
       try {
-        this.validateName(newName);
-        const item = this.findById(id);
+        console.log(this)
+        Item.validateName(newName);
+        const item = findById(id);
         item.name = newName;
       } catch (error) {
           console.log(`Cannot update name ${error.message}`)
