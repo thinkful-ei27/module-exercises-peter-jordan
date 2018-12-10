@@ -10,12 +10,29 @@ const store = (function () {
   ];
   const hideCheckedItems =  false;
   const searchTerm = '';
-
+  const findById = function(id) {
+      return items.find(id => id === items.id);
+  }; 
+  const addItem = function(name) {
+      try {
+        Item.validateName(name);
+        this.items.push(Item.create(name));
+      } catch(error) {
+        console.log(`Cannot add item ${error.message}`);
+      }
+  }
+  const findAndToggleChecked = function(id) {
+      const foundItem =this.findById(id);
+      foundItem.checked = !foundItem.checked;
+  }
 
 
   return {
     items,
     hideCheckedItems,
     searchTerm,
+    findById,
+    addItem,
+
   };
 }() );
